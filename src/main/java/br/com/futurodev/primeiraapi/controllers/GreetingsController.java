@@ -1,5 +1,8 @@
 package br.com.futurodev.primeiraapi.controllers;
 
+import br.com.futurodev.primeiraapi.models.ProdutoModel;
+import br.com.futurodev.primeiraapi.repository.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 public class GreetingsController {
+
+    @Autowired // Injeção de dependencias
+    private ProdutoRepository produtoRepository;
+
     /**
      *
      * @param name the name to greet
@@ -32,5 +39,16 @@ public class GreetingsController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String mostraNome(@PathVariable String nome){
         return "Olá " +nome;
+    }
+
+
+    @RequestMapping(value = "/produto/{descricao}",method =RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public String salvar(@PathVariable String descricao){
+        ProdutoModel produto = new ProdutoModel();
+        produto.setDescricao(descricao);
+        produtoRepository.save(produto); // grava no BD um produto apenas com descricao
+
+        return "Produto: "+descricao+", registrado com sucesso!";
     }
 }
