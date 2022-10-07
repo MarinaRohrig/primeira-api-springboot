@@ -1,4 +1,4 @@
-package br.com.futurodev.primeiraapi.Models;
+package br.com.futurodev.primeiraapi.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,14 +8,14 @@ import java.util.Objects;
 //Diz que essa classe é uma entidade
 @Entity
 @Table(name = "produto")
-@SequenceGenerator(name = "seq_usuario", sequenceName = "seq_produto",allocationSize = 1, initialValue = 1)
+@SequenceGenerator(name = "seq_produto", sequenceName = "seq_produto",allocationSize = 1, initialValue = 1)
 
 //implements serialize para implementar a classe que trata do BD
 public class ProdutoModel implements Serializable {
 
     //identifica o ID como PK
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_usuario")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_produto")
     private Long id;
 
     private String descricao;
