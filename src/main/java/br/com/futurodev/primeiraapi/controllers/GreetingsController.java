@@ -1,11 +1,7 @@
 package br.com.futurodev.primeiraapi.controllers;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -18,9 +14,23 @@ public class GreetingsController {
      * @param name the name to greet
      * @return greeting text
      */
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/mostranome/{name}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public String greetingText(@PathVariable String name) {
         return "Hello " + name + "!";
+    }
+
+
+    @GetMapping(value = "/hello/{nome}")
+    @ResponseStatus(HttpStatus.OK)
+    public String hello(@PathVariable String nome){
+        return "Olá "+nome;
+    }
+
+//teste de response
+    @GetMapping(value ="/mostranomebr/{nome}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String mostraNome(@PathVariable String nome){
+        return "Olá " +nome;
     }
 }
