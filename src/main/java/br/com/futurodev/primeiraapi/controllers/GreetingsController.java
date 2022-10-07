@@ -4,7 +4,10 @@ import br.com.futurodev.primeiraapi.models.ProdutoModel;
 import br.com.futurodev.primeiraapi.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  *
@@ -41,7 +44,6 @@ public class GreetingsController {
         return "Olá " +nome;
     }
 
-
     @RequestMapping(value = "/produto/{descricao}",method =RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public String salvar(@PathVariable String descricao){
@@ -50,5 +52,15 @@ public class GreetingsController {
         produtoRepository.save(produto); // grava no BD um produto apenas com descricao
 
         return "Produto: "+descricao+", registrado com sucesso!";
+    }
+
+
+    @GetMapping
+    @ResponseBody // retorna os dados no corpo da respost, responed entity gera um json
+    public ResponseEntity<List<ProdutoModel>> listarProdutos(){
+
+      List<ProdutoModel> produtos =  produtoRepository.findAll();
+
+      return new ResponseEntity<List<ProdutoModel>>(produtos,HttpStatus.OK);
     }
 }
