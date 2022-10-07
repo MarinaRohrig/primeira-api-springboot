@@ -55,12 +55,13 @@ public class GreetingsController {
     }
 
 
-    @GetMapping
+    @GetMapping(value = "/produtos")
     @ResponseBody // retorna os dados no corpo da respost, responed entity gera um json
     public ResponseEntity<List<ProdutoModel>> listarProdutos(){
 
-      List<ProdutoModel> produtos =  produtoRepository.findAll();
+      List<ProdutoModel> produtos =  produtoRepository.findAll(); // consulta o bd para pegar os produtos
 
-      return new ResponseEntity<List<ProdutoModel>>(produtos,HttpStatus.OK);
+      return new ResponseEntity<List<ProdutoModel>>(produtos,HttpStatus.OK); // retorna o JSON da lista
+
     }
 }
