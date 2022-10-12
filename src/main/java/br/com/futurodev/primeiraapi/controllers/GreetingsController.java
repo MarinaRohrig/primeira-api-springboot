@@ -65,18 +65,18 @@ public class GreetingsController {
 
     }
 
-    @PostMapping(value = "/produto/salvar") /* Mapeia a URL */
-    @ResponseBody /* Descreve a resposta informando que o retorno será no corpo da requisição */
-    public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){ /* Recebe os dados para salvar */
+    @PostMapping(value = "/produto/salvar")
+    @ResponseBody
+    public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){
 
-        ProdutoModel prod = produtoRepository.save(produto);
+        ProdutoModel prod = produtoRepository.save(produto); // envia pelo repository o produto para salvar
         return new ResponseEntity<ProdutoModel>(prod, HttpStatus.CREATED);
 
     }
 
-    @DeleteMapping(value = "/produto/delete") /* Mapeia a URL */
-    @ResponseBody /* Descrição da resposta */
-    public ResponseEntity<String> delete(@RequestParam Long idProduto){ /* Recebe da requisição o parâmetro */
+    @DeleteMapping(value = "/produto/delete")
+    @ResponseBody
+    public ResponseEntity<String> delete(@RequestParam Long idProduto){  // solicita um parametro que é o id para poder localizar o produto que precisa excluir
 
         produtoRepository.deleteById(idProduto);
 
