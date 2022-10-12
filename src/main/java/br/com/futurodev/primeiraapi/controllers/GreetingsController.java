@@ -64,4 +64,23 @@ public class GreetingsController {
       return new ResponseEntity<List<ProdutoModel>>(produtos,HttpStatus.OK); // retorna o JSON da lista
 
     }
+
+    @PostMapping(value = "/produto/salvar") /* Mapeia a URL */
+    @ResponseBody /* Descreve a resposta informando que o retorno será no corpo da requisição */
+    public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){ /* Recebe os dados para salvar */
+
+        ProdutoModel prod = produtoRepository.save(produto);
+        return new ResponseEntity<ProdutoModel>(prod, HttpStatus.CREATED);
+
+    }
+
+    @DeleteMapping(value = "/produto/delete") /* Mapeia a URL */
+    @ResponseBody /* Descrição da resposta */
+    public ResponseEntity<String> delete(@RequestParam Long idProduto){ /* Recebe da requisição o parâmetro */
+
+        produtoRepository.deleteById(idProduto);
+
+        return new ResponseEntity<String>("Produto deletado com sucesso.",HttpStatus.OK);
+
+    }
 }
