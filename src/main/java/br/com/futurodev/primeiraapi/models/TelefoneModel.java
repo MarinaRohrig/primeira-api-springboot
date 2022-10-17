@@ -8,11 +8,33 @@ import java.util.Objects;
 @Table(name = "telefone")
 public class TelefoneModel {
     @Id
-    @SequenceGenerator(name = "seq_telefone",sequenceName = "seq_telefone")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_telefone")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String numero;
     private String tipo;
+
+    private Long idUsuario;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario",referencedColumnName = "id", insertable = true,updatable = true )
+    private UsuarioModel usuario;
+
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public Long getId() {
         return id;

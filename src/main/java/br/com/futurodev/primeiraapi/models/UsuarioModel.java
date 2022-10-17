@@ -9,8 +9,7 @@ import java.util.Objects;
 @Table(name = "usuario")
 public class UsuarioModel {
     @Id
-    @SequenceGenerator(name ="seq_usuario", sequenceName = "seq_usuario")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String login;
@@ -19,6 +18,7 @@ public class UsuarioModel {
 
     private String nome;
 
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
     private List<TelefoneModel> telefones = new ArrayList<>();
     public Long getId() {
         return id;

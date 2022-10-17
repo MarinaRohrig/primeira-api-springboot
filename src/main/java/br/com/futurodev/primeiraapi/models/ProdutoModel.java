@@ -15,7 +15,7 @@ public class ProdutoModel implements Serializable {
 
     //identifica o ID como PK
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_produto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String descricao;
