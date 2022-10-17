@@ -1,15 +1,14 @@
 package br.com.futurodev.primeiraapi.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "usuario")
 public class UsuarioModel {
     @Id
+    @SequenceGenerator(name ="seq_usuario")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(unique = true)
