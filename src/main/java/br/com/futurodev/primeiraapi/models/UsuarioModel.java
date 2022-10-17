@@ -7,8 +7,8 @@ import java.util.Objects;
 @Table(name = "usuario")
 public class UsuarioModel {
     @Id
-    @SequenceGenerator(name ="seq_usuario")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name ="seq_usuario", sequenceName = "seq_usuario")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
     private Long id;
 
     @Column(unique = true)
