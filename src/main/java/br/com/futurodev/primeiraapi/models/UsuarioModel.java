@@ -1,6 +1,8 @@
 package br.com.futurodev.primeiraapi.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +12,6 @@ public class UsuarioModel {
     @SequenceGenerator(name ="seq_usuario", sequenceName = "seq_usuario")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
     private Long id;
-
     @Column(unique = true)
     private String login;
     @Column(unique = true)
@@ -18,6 +19,7 @@ public class UsuarioModel {
 
     private String nome;
 
+    private List<TelefoneModel> telefones = new ArrayList<>();
     public Long getId() {
         return id;
     }
