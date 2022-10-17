@@ -37,5 +37,12 @@ public class UsuarioController {
         return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{idUsuario}", produces = "application/json")
+    public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
+        UsuarioModel usu = usuarioRepository.findById(idUsuario).get();
+
+        return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
+    }
+
 
 }
