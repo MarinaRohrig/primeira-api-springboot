@@ -1,5 +1,7 @@
 package br.com.futurodev.primeiraapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -15,8 +17,8 @@ public class TelefoneModel {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario",referencedColumnName = "id", insertable = true,updatable = true)
+    @JsonBackReference
     private UsuarioModel usuario;
-
 
     public UsuarioModel getUsuario() {
         return usuario;

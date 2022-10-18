@@ -1,5 +1,8 @@
 package br.com.futurodev.primeiraapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,9 @@ public class UsuarioModel {
     private String nome;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<TelefoneModel> telefones = new ArrayList<TelefoneModel>();
+
 
     public List<TelefoneModel> getTelefones() {
         return telefones;
