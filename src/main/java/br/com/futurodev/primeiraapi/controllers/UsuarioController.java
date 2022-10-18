@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/usuario")
@@ -51,22 +52,34 @@ public class UsuarioController {
      @GetMapping(value = "/{idUsuario}", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
         UsuarioModel usu = cadastroUsuarioService.getUserById((idUsuario));
+
+         UsuarioRepresentationModel usuarioRepresentationModel = toModel(usu);
+
+         return new ResponseEntity<UsuarioRepresentationModel>(usuarioRepresentationModel,HttpStatus.OK);
+
+    }
+
+    @GetMapping (value = "/buscarPorNome",produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<List<UsuarioRepresentationModel>> getUserByName(@RequestParam (name = "nome") String nome){
+         //pega as entidades
+        List<UsuarioModel> usuarios = cadastroUsuarioService.getUserByName(nome);
+        // converte usuariomodel em representation model (DTO)
+        List<UsuarioRepresentationModel> usuariosRepresentationModel = toCollectionModel(usuarios);
+        return new ResponseEntity<List<UsuarioRepresentationModel>>(usuariosRepresentationModel,HttpStatus.OK);
+    }
+    private UsuarioRepresentationModel toModel(UsuarioModel usu) {
         UsuarioRepresentationModel usuarioRepresentationModel = new UsuarioRepresentationModel();
         usuarioRepresentationModel.setId(usu.getId());
         usuarioRepresentationModel.setNome(usu.getNome());
         usuarioRepresentationModel.setLogin(usu.getLogin());
-
-        return new ResponseEntity<UsuarioRepresentationModel>(usuarioRepresentationModel,HttpStatus.OK);
-
+        return usuarioRepresentationModel;
     }
 
+    private List<UsuarioRepresentationModel> toCollectionModel(List<UsuarioModel> usuariosModel){
+         return usuariosModel.stream().map(usuarioModel -> toModel(usuarioModel) )
+                 .collect(Collectors.toList());
 
-    @GetMapping (value = "/buscarPorNome",produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<List<UsuarioModel>> getUserByName(@RequestParam (name = "nome") String nome){
-        List<UsuarioModel> usuarios = cadastroUsuarioService.getUserByName(nome);
-        return new ResponseEntity<List<UsuarioModel>>(usuarios,HttpStatus.OK);
     }
-
 
 }
