@@ -24,15 +24,15 @@ public class UsuarioController {
     private CadastroUsuarioService cadastroUsuarioService;
 
     @PostMapping(value = "/", produces = "application/json")
-    public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario) {
+    public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioModel usuario) {
         UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
-        return new ResponseEntity<UsuarioModel>(usu, HttpStatus.CREATED);
+        return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.CREATED);
     }
 
     @PutMapping(value="/",produces= "application/json")
-    public ResponseEntity<UsuarioModel> atualizar(@RequestBody UsuarioModel usuario){
+    public ResponseEntity<UsuarioRepresentationModel> atualizar(@RequestBody UsuarioModel usuario){
         UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
-        return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
+        return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu),HttpStatus.OK);
     }
 
     @DeleteMapping(value="/")
@@ -41,13 +41,6 @@ public class UsuarioController {
        cadastroUsuarioService.delete(idUsuario);
         return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
     }
-
-    /*@GetMapping(value = "/{idUsuario}", produces = "application/json")
-   // public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
-        UsuarioModel usu = cadastroUsuarioService.getUserById(idUsuario);
-        return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
-    }
-*/
 
      @GetMapping(value = "/{idUsuario}", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
