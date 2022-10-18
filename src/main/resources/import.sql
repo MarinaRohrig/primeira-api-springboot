@@ -11,3 +11,5 @@ INSERT INTO public.usuario(login, nome, senha) VALUES ( 'larissarohrig', 'Lariss
 INSERT INTO public.usuario(login, nome, senha) VALUES ( 'Tutu', 'Testezinho', '10000');
 INSERT INTO public.usuario(login, nome, senha) VALUES ( 'Lalala', 'Lalalala', '235523');
 INSERT INTO public.usuario(login, nome, senha) VALUES ( 'Luluzinha', 'Luciana', '15523');
+
+INSERT INTO public.telefone(numero, tipo, id_usuario) VALUES ('999999999','Celular',1);
