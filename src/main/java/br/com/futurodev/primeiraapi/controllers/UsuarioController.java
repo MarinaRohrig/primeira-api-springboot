@@ -25,7 +25,14 @@ public class UsuarioController {
     public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario){ // recebe o json da requisição e converte para um objeto UsuarioModel
 //        UsuarioModel usu = usuarioRepository.save(usuario);
         return new ResponseEntity<UsuarioModel>(usu, HttpStatus.CREATED);
-    }*/
+    }
+     @PutMapping(value="/",produces= "application/json")
+    public ResponseEntity<UsuarioModel> atualizar(@RequestBody UsuarioModel usuario){
+        UsuarioModel usu = usuarioRepository.save(usuario);
+        return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
+    }
+
+    */
 
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario) {
@@ -35,7 +42,7 @@ public class UsuarioController {
 
     @PutMapping(value="/",produces= "application/json")
     public ResponseEntity<UsuarioModel> atualizar(@RequestBody UsuarioModel usuario){
-        UsuarioModel usu = usuarioRepository.save(usuario);
+        UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
         return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
     }
 
