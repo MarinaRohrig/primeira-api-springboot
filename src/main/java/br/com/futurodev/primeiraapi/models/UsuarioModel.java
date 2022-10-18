@@ -19,7 +19,16 @@ public class UsuarioModel {
     private String nome;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-    private List<TelefoneModel> telefones = new ArrayList<>();
+    private List<TelefoneModel> telefones = new ArrayList<TelefoneModel>();
+
+    public List<TelefoneModel> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<TelefoneModel> telefones) {
+        this.telefones = telefones;
+    }
+
     public Long getId() {
         return id;
     }

@@ -13,10 +13,8 @@ public class TelefoneModel {
     private String numero;
     private String tipo;
 
-    private Long idUsuario;
-
     @ManyToOne
-    @JoinColumn(name = "idUsuario",referencedColumnName = "id", insertable = true,updatable = true )
+    @JoinColumn(name = "idUsuario",referencedColumnName = "id", insertable = true,updatable = true)
     private UsuarioModel usuario;
 
 
@@ -26,14 +24,6 @@ public class TelefoneModel {
 
     public void setUsuario(UsuarioModel usuario) {
         this.usuario = usuario;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public Long getId() {
