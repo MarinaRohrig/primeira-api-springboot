@@ -1,5 +1,6 @@
 package br.com.futurodev.primeiraapi.controllers;
 
+import br.com.futurodev.primeiraapi.dto.UsuarioRepresentationModel;
 import br.com.futurodev.primeiraapi.models.UsuarioModel;
 import br.com.futurodev.primeiraapi.repository.UsuarioRepository;
 import br.com.futurodev.primeiraapi.service.CadastroUsuarioService;
@@ -21,44 +22,6 @@ public class UsuarioController {
     @Autowired
     private CadastroUsuarioService cadastroUsuarioService;
 
- /*
-      @Autowired
-    private UsuarioRepository usuarioRepository;
-
-  @PostMapping(value = "/", produces= "application/json") // quando fizer uma requisição localhost:8000/usuario e usar o POST, cai aqui
-    public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario){ // recebe o json da requisição e converte para um objeto UsuarioModel
-//        UsuarioModel usu = usuarioRepository.save(usuario);
-        return new ResponseEntity<UsuarioModel>(usu, HttpStatus.CREATED);
-    }
-     @PutMapping(value="/",produces= "application/json")
-    public ResponseEntity<UsuarioModel> atualizar(@RequestBody UsuarioModel usuario){
-        UsuarioModel usu = usuarioRepository.save(usuario);
-        return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
-    }
-
-      @DeleteMapping(value="/")
-    @ResponseBody
-    public ResponseEntity<String> delete(@RequestParam Long idUsuario){
-        usuarioRepository.deleteById(idUsuario);
-        return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
-    }
-
-@GetMapping(value = "/{idUsuario}", produces = "application/json")
-    public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
-        UsuarioModel usu = usuarioRepository.findById(idUsuario).get();
-
-        return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
-    }
-
-    @GetMapping (value = "/buscarPorNome",produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<List<UsuarioModel>> getUserByName(@RequestParam (name = "nome") String nome){
-        List <UsuarioModel> usuarios = usuarioRepository.getUserByname(nome);
-        return new ResponseEntity<List<UsuarioModel>>(usuarios,HttpStatus.OK);
-    }
-
-    */
-
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario) {
         UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
@@ -78,11 +41,25 @@ public class UsuarioController {
         return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{idUsuario}", produces = "application/json")
-    public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
+    /*@GetMapping(value = "/{idUsuario}", produces = "application/json")
+   // public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
         UsuarioModel usu = cadastroUsuarioService.getUserById(idUsuario);
         return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
     }
+*/
+
+     @GetMapping(value = "/{idUsuario}", produces = "application/json")
+    public ResponseEntity<UsuarioRepresentationModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
+        UsuarioModel usu = cadastroUsuarioService.getUserById((idUsuario));
+        UsuarioRepresentationModel usuarioRepresentationModel = new UsuarioRepresentationModel();
+        usuarioRepresentationModel.setId(usu.getId());
+        usuarioRepresentationModel.setNome(usu.getNome());
+        usuarioRepresentationModel.setLogin(usu.getLogin());
+
+        return new ResponseEntity<UsuarioRepresentationModel>(usuarioRepresentationModel,HttpStatus.OK);
+
+    }
+
 
     @GetMapping (value = "/buscarPorNome",produces = "application/json")
     @ResponseBody

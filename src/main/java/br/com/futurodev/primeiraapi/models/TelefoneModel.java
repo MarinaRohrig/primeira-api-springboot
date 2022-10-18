@@ -16,7 +16,7 @@ public class TelefoneModel {
     private String tipo;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario",referencedColumnName = "id", insertable = true,updatable = true)
+    @JoinColumn(name = "idUsuario",referencedColumnName = "id", insertable = true,updatable = true,foreignKey = @ForeignKey(name = "fk_usuario") )
     @JsonBackReference
     private UsuarioModel usuario;
 
