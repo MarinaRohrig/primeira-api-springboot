@@ -32,6 +32,20 @@ public class UsuarioController {
         return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
     }
 
+      @DeleteMapping(value="/")
+    @ResponseBody
+    public ResponseEntity<String> delete(@RequestParam Long idUsuario){
+        usuarioRepository.deleteById(idUsuario);
+        return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
+    }
+
+@GetMapping(value = "/{idUsuario}", produces = "application/json")
+    public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
+        UsuarioModel usu = usuarioRepository.findById(idUsuario).get();
+
+        return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
+    }
+
     */
 
     @PostMapping(value = "/", produces = "application/json")
@@ -49,7 +63,7 @@ public class UsuarioController {
     @DeleteMapping(value="/")
     @ResponseBody
     public ResponseEntity<String> delete(@RequestParam Long idUsuario){
-        usuarioRepository.deleteById(idUsuario);
+       cadastroUsuarioService.delete(idUsuario);
         return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
     }
 
