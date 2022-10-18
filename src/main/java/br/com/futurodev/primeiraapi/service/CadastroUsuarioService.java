@@ -20,4 +20,8 @@ public class CadastroUsuarioService {
         usuarioRepository.deleteById(idUsuario);
     }
 
+    public UsuarioModel getUserById(Long idUsuario){
+        return usuarioRepository.findById(idUsuario).get();
+    }
+
 }

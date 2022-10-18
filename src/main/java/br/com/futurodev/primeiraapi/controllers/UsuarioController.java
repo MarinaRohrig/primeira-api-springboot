@@ -69,8 +69,7 @@ public class UsuarioController {
 
     @GetMapping(value = "/{idUsuario}", produces = "application/json")
     public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
-        UsuarioModel usu = usuarioRepository.findById(idUsuario).get();
-
+        UsuarioModel usu = cadastroUsuarioService.getUserById(idUsuario);
         return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
     }
 
