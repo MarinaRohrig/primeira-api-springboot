@@ -2,8 +2,11 @@ package br.com.futurodev.primeiraapi.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +23,31 @@ public class UsuarioModel {
     private String senha;
 
     private String nome;
+
+    @CreationTimestamp
+    @Column(columnDefinition = "timestamp(0) without time zone DEFAULT timezone('utc'::text,CURRENT_TIMESTAMP(0))",updatable = false)
+    private OffsetDateTime dataCadasto;
+
+    @UpdateTimestamp
+    @Column(columnDefinition = "timestamp(0) without time zone DEFAULT timezone('utc'::text,CURRENT_TIMESTAMP(0))")
+    private OffsetDateTime dataAtualizacao;
+
+
+    public OffsetDateTime getDataCadasto() {
+        return dataCadasto;
+    }
+
+    public void setDataCadasto(OffsetDateTime dataCadasto) {
+        this.dataCadasto = dataCadasto;
+    }
+
+    public OffsetDateTime getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(OffsetDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
     @JsonManagedReference
