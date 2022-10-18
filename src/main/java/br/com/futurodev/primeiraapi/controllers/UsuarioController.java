@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/usuario")
 //Tudo que cair no localhost:8000/usuario cai nessa classe para controle
@@ -46,6 +48,13 @@ public class UsuarioController {
         return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
     }
 
+    @GetMapping (value = "/buscarPorNome",produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<List<UsuarioModel>> getUserByName(@RequestParam (name = "nome") String nome){
+        List <UsuarioModel> usuarios = usuarioRepository.getUserByname(nome);
+        return new ResponseEntity<List<UsuarioModel>>(usuarios,HttpStatus.OK);
+    }
+
     */
 
     @PostMapping(value = "/", produces = "application/json")
@@ -71,6 +80,13 @@ public class UsuarioController {
     public ResponseEntity<UsuarioModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
         UsuarioModel usu = cadastroUsuarioService.getUserById(idUsuario);
         return new ResponseEntity<UsuarioModel>(usu,HttpStatus.OK);
+    }
+
+    @GetMapping (value = "/buscarPorNome",produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<List<UsuarioModel>> getUserByName(@RequestParam (name = "nome") String nome){
+        List<UsuarioModel> usuarios = cadastroUsuarioService.getUserByName(nome);
+        return new ResponseEntity<List<UsuarioModel>>(usuarios,HttpStatus.OK);
     }
 
 
