@@ -66,6 +66,9 @@ public class UsuarioController {
         usuarioRepresentationModel.setId(usu.getId());
         usuarioRepresentationModel.setNome(usu.getNome());
         usuarioRepresentationModel.setLogin(usu.getLogin());
+
+        usuarioRepresentationModel.setTelefones(usu.getTelefones());
+
         return usuarioRepresentationModel;
     }
 

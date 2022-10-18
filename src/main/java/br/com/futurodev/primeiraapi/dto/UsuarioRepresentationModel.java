@@ -1,6 +1,10 @@
 package br.com.futurodev.primeiraapi.dto;
 
+import br.com.futurodev.primeiraapi.models.TelefoneModel;
+
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioRepresentationModel {
     private Long id;
@@ -10,6 +14,16 @@ public class UsuarioRepresentationModel {
     private OffsetDateTime dataCadastro;
 
     private OffsetDateTime dataAtualizacao;
+
+    private List<TelefoneModel> telefones = new ArrayList<TelefoneModel>();
+
+    public List<TelefoneModel> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<TelefoneModel> telefones) {
+        this.telefones = telefones;
+    }
 
     public OffsetDateTime getDataCadastro() {
         return dataCadastro;
