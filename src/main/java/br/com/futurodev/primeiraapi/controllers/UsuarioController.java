@@ -1,6 +1,8 @@
 package br.com.futurodev.primeiraapi.controllers;
 
 import br.com.futurodev.primeiraapi.dto.UsuarioRepresentationModel;
+import br.com.futurodev.primeiraapi.input.UsuarioInput;
+import br.com.futurodev.primeiraapi.models.TelefoneModel;
 import br.com.futurodev.primeiraapi.models.UsuarioModel;
 import br.com.futurodev.primeiraapi.repository.UsuarioRepository;
 import br.com.futurodev.primeiraapi.service.CadastroUsuarioService;
@@ -23,8 +25,16 @@ public class UsuarioController {
     @Autowired
     private CadastroUsuarioService cadastroUsuarioService;
 
-    @PostMapping(value = "/", produces = "application/json")
+    /*@PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioModel usuario) {
+        UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
+        return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.CREATED);
+    }*/
+
+    @PostMapping(value = "/", produces = "application/json")
+    public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioInput usuarioInput) {
+
+
         UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.CREATED);
     }
@@ -75,6 +85,30 @@ public class UsuarioController {
     private List<UsuarioRepresentationModel> toCollectionModel(List<UsuarioModel> usuariosModel){
          return usuariosModel.stream().map(usuarioModel -> toModel(usuarioModel) )
                  .collect(Collectors.toList());
+
+    }
+
+    //converte um objeto do tipo usuarioinput para usuariomodel
+    private UsuarioModel toDomainObject(UsuarioInput usuarioInput){
+        UsuarioModel usuarioModel = new UsuarioModel();
+        usuarioModel.setId(usuarioInput.getId());
+        usuarioModel.setNome(usuarioInput.getNome());
+        usuarioModel.setLogin(usuarioInput.getLogin());
+        usuarioModel.setSenha(usuarioInput.getSenha());
+
+      /*  for (int i=0; i<usuarioInput.getTelefones().size(); i++){
+            TelefoneModel telefoneModel = new TelefoneModel();
+            telefoneModel.setTipo(usuarioInput.getTelefones().get(i).getTipo());
+            telefoneModel.setNumero(usuarioInput.getTelefones().get(i).getNumero);
+            telefoneModel.setId(usuarioInput.getTelefones().get(i).getId);
+            telefoneModel.setUsuario(usuarioModel);
+
+            usuarioModel.getTelefones().add(telefoneModel);
+
+
+        } */
+
+        return usuarioModel;
 
     }
 
