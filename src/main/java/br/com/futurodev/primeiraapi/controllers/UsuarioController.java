@@ -71,6 +71,9 @@ public class UsuarioController {
         usuarioRepresentationModel.setId(usu.getId());
         usuarioRepresentationModel.setNome(usu.getNome());
         usuarioRepresentationModel.setLogin(usu.getLogin());
+        usuarioRepresentationModel.setSenha(usu.getSenha());
+        usuarioRepresentationModel.setDataCadastro(usu.getDataCadasto());
+        usuarioRepresentationModel.setDataAtualizacao(usu.getDataAtualizacao());
 
 
         for (int i=0; i<usu.getTelefones().size();i++){

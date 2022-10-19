@@ -11,9 +11,19 @@ public class UsuarioRepresentationModel {
     private String nome;
     private String login;
 
+    private String senha;
+
     private OffsetDateTime dataCadastro;
 
     private OffsetDateTime dataAtualizacao;
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     private List<TelefoneRepresentationModel> telefones = new ArrayList<TelefoneRepresentationModel>();
 
