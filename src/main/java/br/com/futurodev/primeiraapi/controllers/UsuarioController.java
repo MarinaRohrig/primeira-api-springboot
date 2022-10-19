@@ -9,6 +9,7 @@ import br.com.futurodev.primeiraapi.repository.UsuarioRepository;
 import br.com.futurodev.primeiraapi.service.CadastroUsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Api(tags = "Usuários")
 @RestController
-@RequestMapping(value = "/usuario")
+@RequestMapping(value = "/usuarios")
 //Tudo que cair no localhost:8000/usuario cai nessa classe para controle
 
 public class UsuarioController {
@@ -48,7 +49,7 @@ public class UsuarioController {
     @ApiOperation("Deleta o usuário")
     @DeleteMapping(value="/")
     @ResponseBody
-    public ResponseEntity<String> delete(@RequestParam Long idUsuario){
+    public ResponseEntity<String> delete( @ApiParam(value= "ID do usuário") @RequestParam Long idUsuario){
        cadastroUsuarioService.delete(idUsuario);
         return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
     }
