@@ -49,7 +49,7 @@ public class UsuarioController {
     @ApiOperation("Deleta o usuário")
     @DeleteMapping(value="/")
     @ResponseBody
-    public ResponseEntity<String> delete( @ApiParam(value= "ID do usuário") @RequestParam Long idUsuario){
+    public ResponseEntity<String> delete( @ApiParam(value= "ID do usuário", example = "1") @RequestParam Long idUsuario){
        cadastroUsuarioService.delete(idUsuario);
         return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
     }

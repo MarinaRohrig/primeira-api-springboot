@@ -3,6 +3,7 @@ package br.com.futurodev.primeiraapi.springfox;
 import io.swagger.annotations.Tag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -35,14 +36,14 @@ private ApiInfo metaData(){
             .build();
 }
 
+@Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry){
+        registry.addResourceHandler("swagger-ui.html") // nome do arquivo de renderização da página no navegador
+                .addResourceLocations("classpath:/META-INF/resources/"); // local do arquivo .html
 
-
-
-
-
-
-
-
+        registry.addResourceHandler("/webjars/**") // outros arquivos dentro da pasta webjar
+                .addResourceLocations("classpath:/META-INF/resources/webjars");
+}
 
 
 }
