@@ -25,12 +25,6 @@ public class UsuarioController {
     @Autowired
     private CadastroUsuarioService cadastroUsuarioService;
 
-    /*@PostMapping(value = "/", produces = "application/json")
-    public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioModel usuario) {
-        UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
-        return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.CREATED);
-    }*/
-
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioInput usuarioInput) {
         UsuarioModel usu = toDomainObject(usuarioInput);
@@ -39,8 +33,8 @@ public class UsuarioController {
     }
 
     @PutMapping(value="/",produces= "application/json")
-    public ResponseEntity<UsuarioRepresentationModel> atualizar(@RequestBody UsuarioModel usuario){
-        UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
+    public ResponseEntity<UsuarioRepresentationModel> atualizar(@RequestBody UsuarioInput usuarioInput){
+        UsuarioModel usu = cadastroUsuarioService.salvar(toDomainObject(usuarioInput));
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu),HttpStatus.OK);
     }
 
