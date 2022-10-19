@@ -99,17 +99,17 @@ public class UsuarioController {
         usuarioModel.setLogin(usuarioInput.getLogin());
         usuarioModel.setSenha(usuarioInput.getSenha());
 
-      /*  for (int i=0; i<usuarioInput.getTelefones().size(); i++){
+        for (int i=0; i<usuarioInput.getTelefones().size(); i++){
             TelefoneModel telefoneModel = new TelefoneModel();
             telefoneModel.setTipo(usuarioInput.getTelefones().get(i).getTipo());
-            telefoneModel.setNumero(usuarioInput.getTelefones().get(i).getNumero);
-            telefoneModel.setId(usuarioInput.getTelefones().get(i).getId);
+            telefoneModel.setNumero(usuarioInput.getTelefones().get(i).getNumero());
+            telefoneModel.setId(usuarioInput.getTelefones().get(i).getId());
             telefoneModel.setUsuario(usuarioModel);
 
             usuarioModel.getTelefones().add(telefoneModel);
 
 
-        } */
+        }
 
         return usuarioModel;
 

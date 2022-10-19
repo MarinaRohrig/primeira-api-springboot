@@ -1,11 +1,26 @@
 package br.com.futurodev.primeiraapi.input;
 
+import br.com.futurodev.primeiraapi.dto.TelefoneRepresentationModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class UsuarioInput {
 
     private Long id;
     private String nome;
     private String login;
     private String senha;
+
+    private List<TelefoneRepresentationModel> telefones = new ArrayList<TelefoneRepresentationModel>();
+
+    public List<TelefoneRepresentationModel> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<TelefoneRepresentationModel> telefones) {
+        this.telefones = telefones;
+    }
 
     public Long getId() {
         return id;
