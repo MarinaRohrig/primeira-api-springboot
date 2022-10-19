@@ -33,9 +33,8 @@ public class UsuarioController {
 
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioInput usuarioInput) {
-
-
-        UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
+        UsuarioModel usu = toDomainObject(usuarioInput);
+        cadastroUsuarioService.salvar(usu);
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.CREATED);
     }
 
