@@ -1,6 +1,7 @@
 package br.com.futurodev.primeiraapi.dto;
 
 import br.com.futurodev.primeiraapi.models.TelefoneModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -13,8 +14,10 @@ public class UsuarioRepresentationModel {
 
     private String senha;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime dataCadastro;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime dataAtualizacao;
 
     public String getSenha() {
