@@ -7,6 +7,8 @@ import br.com.futurodev.primeiraapi.models.TelefoneModel;
 import br.com.futurodev.primeiraapi.models.UsuarioModel;
 import br.com.futurodev.primeiraapi.repository.UsuarioRepository;
 import br.com.futurodev.primeiraapi.service.CadastroUsuarioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Api(tags = "Usuários")
 @RestController
 @RequestMapping(value = "/usuario")
 //Tudo que cair no localhost:8000/usuario cai nessa classe para controle
@@ -27,6 +30,7 @@ public class UsuarioController {
     @Autowired
     private CadastroUsuarioService cadastroUsuarioService;
 
+    @ApiOperation("Salva o usuário")
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioInput usuarioInput) {
         UsuarioModel usu = toDomainObject(usuarioInput);
@@ -34,12 +38,14 @@ public class UsuarioController {
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.CREATED);
     }
 
+    @ApiOperation("Atualiza o usuário")
     @PutMapping(value="/",produces= "application/json")
     public ResponseEntity<UsuarioRepresentationModel> atualizar(@RequestBody UsuarioInput usuarioInput){
         UsuarioModel usu = cadastroUsuarioService.salvar(toDomainObject(usuarioInput));
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu),HttpStatus.OK);
     }
 
+    @ApiOperation("Deleta o usuário")
     @DeleteMapping(value="/")
     @ResponseBody
     public ResponseEntity<String> delete(@RequestParam Long idUsuario){
@@ -47,6 +53,7 @@ public class UsuarioController {
         return new ResponseEntity<String>("Usuário deletado com sucesso!", HttpStatus.OK);
     }
 
+    @ApiOperation("Busca o usuário pelo ID")
      @GetMapping(value = "/{idUsuario}", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> getUserByid(@PathVariable(value = "idUsuario")Long idUsuario){
         UsuarioModel usu = cadastroUsuarioService.getUserById((idUsuario));
@@ -57,6 +64,7 @@ public class UsuarioController {
 
     }
 
+    @ApiOperation("Busca o usuário pelo nome")
     @GetMapping (value = "/buscarPorNome",produces = "application/json")
     @ResponseBody
     public ResponseEntity<List<UsuarioRepresentationModel>> getUserByName(@RequestParam (name = "nome") String nome){
