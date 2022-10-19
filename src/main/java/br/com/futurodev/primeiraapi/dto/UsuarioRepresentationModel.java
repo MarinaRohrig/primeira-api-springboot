@@ -15,13 +15,13 @@ public class UsuarioRepresentationModel {
 
     private OffsetDateTime dataAtualizacao;
 
-    private List<TelefoneModel> telefones = new ArrayList<TelefoneModel>();
+    private List<TelefoneRepresentationModel> telefones = new ArrayList<TelefoneRepresentationModel>();
 
-    public List<TelefoneModel> getTelefones() {
+    public List<TelefoneRepresentationModel> getTelefones() {
         return telefones;
     }
 
-    public void setTelefones(List<TelefoneModel> telefones) {
+    public void setTelefones(List<TelefoneRepresentationModel> telefones) {
         this.telefones = telefones;
     }
 

@@ -5,7 +5,7 @@ public class TelefoneRepresentationModel {
     private String numero;
     private String tipo;
 
-    
+
 
     public Long getId() {
         return id;

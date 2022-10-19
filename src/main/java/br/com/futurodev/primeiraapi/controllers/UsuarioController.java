@@ -1,5 +1,6 @@
 package br.com.futurodev.primeiraapi.controllers;
 
+import br.com.futurodev.primeiraapi.dto.TelefoneRepresentationModel;
 import br.com.futurodev.primeiraapi.dto.UsuarioRepresentationModel;
 import br.com.futurodev.primeiraapi.input.UsuarioInput;
 import br.com.futurodev.primeiraapi.models.TelefoneModel;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,7 +72,15 @@ public class UsuarioController {
         usuarioRepresentationModel.setNome(usu.getNome());
         usuarioRepresentationModel.setLogin(usu.getLogin());
 
-        usuarioRepresentationModel.setTelefones(usu.getTelefones());
+
+        for (int i=0; i<usu.getTelefones().size();i++){
+            TelefoneRepresentationModel telefonesRepresentationModel = new TelefoneRepresentationModel();
+            telefonesRepresentationModel.setId(usu.getTelefones().get(i).getId());
+            telefonesRepresentationModel.setNumero(usu.getTelefones().get(i).getNumero());
+            telefonesRepresentationModel.setTipo(usu.getTelefones().get(i).getTipo());
+
+            usuarioRepresentationModel.getTelefones().add(telefonesRepresentationModel);
+        }
 
         return usuarioRepresentationModel;
     }
