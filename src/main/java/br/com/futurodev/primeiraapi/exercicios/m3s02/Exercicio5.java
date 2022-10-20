@@ -13,8 +13,8 @@ public class Exercicio5 {
         return "Olá "+nome+", estamos começando nosso trabalho com Spring Boot!";
     }
 
-    @GetMapping(value = "/media/{nota1}/{nota2}",produces = "application/json")
-    public String media(@PathVariable Double nota1, Double nota2){
+    @GetMapping(value = "/media/",produces = "application/json")
+    public String media(@RequestParam Double nota1, Double nota2){
         return "A média é: "+((nota1+nota2)/2)+".";
     }
 
