@@ -31,7 +31,11 @@ public class UsuarioModel {
     @UpdateTimestamp
     @Column(columnDefinition = "timestamp(0) without time zone DEFAULT timezone('utc'::text,CURRENT_TIMESTAMP(0))")
     private OffsetDateTime dataAtualizacao;
-
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    // FetchType para forçar o padrão Eager, já que por ser uma lista ele não vai funcionar
+    // o get se não carregar a lista de telefones junto
+    @JsonManagedReference
+    private List<TelefoneModel> telefones = new ArrayList<TelefoneModel>();
 
     public OffsetDateTime getDataCadasto() {
         return dataCadasto;
@@ -49,9 +53,7 @@ public class UsuarioModel {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<TelefoneModel> telefones = new ArrayList<TelefoneModel>();
+
 
 
     public List<TelefoneModel> getTelefones() {

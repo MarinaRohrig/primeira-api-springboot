@@ -1,15 +1,42 @@
 package br.com.futurodev.primeiraapi.dto;
 
+import br.com.futurodev.primeiraapi.models.TelefoneModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioRepresentationModel {
     private Long id;
     private String nome;
     private String login;
 
+    private String senha;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime dataCadastro;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime dataAtualizacao;
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    private List<TelefoneRepresentationModel> telefones = new ArrayList<TelefoneRepresentationModel>();
+
+    public List<TelefoneRepresentationModel> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<TelefoneRepresentationModel> telefones) {
+        this.telefones = telefones;
+    }
 
     public OffsetDateTime getDataCadastro() {
         return dataCadastro;
