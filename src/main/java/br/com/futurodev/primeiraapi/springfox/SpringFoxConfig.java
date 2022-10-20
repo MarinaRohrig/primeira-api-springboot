@@ -23,7 +23,7 @@ public class SpringFoxConfig extends WebMvcConfigurationSupport {
                 .apis(RequestHandlerSelectors.any())
                 .build()
                 .apiInfo(metaData());
-               // .tags(new Tag("Usuários","Gerencia usuários"));
+                //.tags(new Tag("Usuários","Gerencia usuários"));
 }
 
 private ApiInfo metaData(){
