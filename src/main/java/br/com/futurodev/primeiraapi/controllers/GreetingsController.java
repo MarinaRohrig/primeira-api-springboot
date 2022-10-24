@@ -61,7 +61,7 @@ public class GreetingsController {
 
       List<ProdutoModel> produtos =  produtoRepository.findAll(); // consulta o bd para pegar os produtos
 
-      return new ResponseEntity<List<ProdutoModel>>(produtos,HttpStatus.OK); // retorna o JSON da lista
+      return new ResponseEntity<>(produtos,HttpStatus.OK); // retorna o JSON da lista
 
     }
 
@@ -70,7 +70,7 @@ public class GreetingsController {
     public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){
 
         ProdutoModel prod = produtoRepository.save(produto); // envia pelo repository o produto para salvar
-        return new ResponseEntity<ProdutoModel>(prod, HttpStatus.CREATED);
+        return new ResponseEntity<>(prod, HttpStatus.CREATED);
 
     }
 
@@ -80,7 +80,7 @@ public class GreetingsController {
 
         produtoRepository.deleteById(idProduto);
 
-        return new ResponseEntity<String>("Produto deletado com sucesso.",HttpStatus.OK);
+        return new ResponseEntity<>("Produto deletado com sucesso.",HttpStatus.OK);
 
     }
 }

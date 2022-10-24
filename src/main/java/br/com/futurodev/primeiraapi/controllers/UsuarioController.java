@@ -5,18 +5,15 @@ import br.com.futurodev.primeiraapi.dto.UsuarioRepresentationModel;
 import br.com.futurodev.primeiraapi.input.UsuarioInput;
 import br.com.futurodev.primeiraapi.models.TelefoneModel;
 import br.com.futurodev.primeiraapi.models.UsuarioModel;
-import br.com.futurodev.primeiraapi.repository.UsuarioRepository;
 import br.com.futurodev.primeiraapi.service.CadastroUsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
