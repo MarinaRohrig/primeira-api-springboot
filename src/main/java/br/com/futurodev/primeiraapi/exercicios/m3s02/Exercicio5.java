@@ -13,6 +13,7 @@ public class Exercicio5 {
         return "Olá "+nome+", estamos começando nosso trabalho com Spring Boot!";
     }
 
+    //Recebe os parametros media/?nota1=2&nota2=3
     @GetMapping(value = "/media/",produces = "application/json")
     public String media(@RequestParam Double nota1, Double nota2){
         return "A média é: "+((nota1+nota2)/2)+".";
